@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <errno.h>
-#include "../include/server.h"
+#include "./server.h"
 
 struct server *server_create(void){
 		server_t *new_server = calloc(1, sizeof(server_t));
@@ -12,9 +12,7 @@ struct server *server_create(void){
 		return new_server;
 }
 
-//TODO: correct bug line 44
 server_t* server_init( int type, int protocol, char *address, int port ){
-#include <arpa/inet.h>
 		if(!address){
 				fprintf(stderr, "%s:%d\n\tInvalid params passed to server_init function\n", __FILE__, __LINE__);
 				return NULL;
@@ -42,7 +40,7 @@ server_t* server_init( int type, int protocol, char *address, int port ){
 		}
 		server->addr.sin_family = AF_INET;
 		server->addr.sin_port = htons(port);
-		//server->addr.sin_addr = inet_addr(address);
+		server->addr.sin_addr.s_addr = inet_addr(address);
 		server->addr_len = sizeof(server->addr);
 
 		return server;
