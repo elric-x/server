@@ -1,12 +1,12 @@
 CC=gcc
 CFLAGS= -Wall -Wextra
 
-all: libwsServer.tar 
+all: libwserver.tar 
 
-libwsServer.tar: libwsServer.o
-	ar rcs libwsServer.a libwsServer.o
-	tar -cf libwsServer.tar libwsServer.a server.h
+libserver.tar: libwsServer.o
+	ar rcs libserver.a libserver.o
+	tar -cf libserver.tar libserver.a server.h
 
-libwsServer.o: server.c server.h 
+libserver.o: server.c server.h 
 	$(CC) -c server.c -o $@
 
